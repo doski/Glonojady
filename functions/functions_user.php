@@ -73,4 +73,18 @@
 		}
 	}
 
+	function dodaj_lekarza($pesel_pracownika, $haslo, $imie, $nazwisko, $specjalizacja, $godz_od, $godz_do){
+		
+		$lacz = lacz_baza_danych();
+		$haslo2 = md5($haslo);
+		$wynik = $lacz->query("insert into pracownicy(pesel_pracownika, haslo, imie, nazwisko, specjalizacja, czy_zmieniono_haslo) 
+		values ('$pesel_pracownika', '$haslo2', '$imie', '$nazwisko', '$specjalizacja', 1)");
+		echo '<p class="correct">Konto utworzone pomyślnie. Twoje hasło to: '.$haslo.'</p><br />';
+		if($wynik == false){
+			throw new Exception('<p class="error">Dodanie konta lekarza nie powiodło się.</p><br />');
+		}
+		else{
+			return true; 
+		}
+	}
 ?>
