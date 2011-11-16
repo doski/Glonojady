@@ -78,7 +78,7 @@
 			<input type="submit" value="Zmień" />
 		</form>		
 		<?php
-	}
+	}	
 	
 	//sprawdzanie wypełnienia pól formularza
 	function wypelniony($zmienne_formularza){
@@ -102,6 +102,10 @@
 			}
 			if($_SESSION['typ_uzytkownika'] == 'sekretarka'){
 				echo'<a href="add_patient_form.php">Utwórz konto pacjenta</a>';
+				echo '&nbsp;|&nbsp;';
+			}
+			if($_SESSION['typ_uzytkownika'] == 'kierownik'){
+				echo'<a href="add_doctor_form.php">Dodaj lekarza</a>';
 				echo '&nbsp;|&nbsp;';
 			}
 		?>
@@ -166,6 +170,32 @@
 			<label for="ubezpieczenie">Ubezpieczenie:</label>
 			<input type="text" name="ubezpieczenie" /><br /><br />
 			<input type="submit" value="Utwórz konto" />
+		</form>		
+		<?php
+	}
+	
+	//formularz dodawania lekarza
+	function wyswietl_nowy_lekarz_form(){
+		?>
+		<form action="add_doctor.php" method="post">
+			<label for="pesel_pracownika">PESEL:</label>
+			<input type="text" name="pesel_pracownika" /><br /><br />
+			<label for="haslo1">Hasło:</label>
+			<input type="text" name="haslo1" /><br /><br />
+			<label for="haslo2">Powtórz hasło:</label>
+			<input type="text" name="haslo2" /><br /><br />
+			<label for="imie">Imię:</label>
+			<input type="text" name="imie" /><br /><br />
+			<label for="nazwisko">Nazwisko:</label>
+			<input type="text" name="nazwisko" /><br /><br />
+			<label for="specjalizacja">Specjalizacja:</label>
+			<input type="text" name="specjalizacja" /><br /><br />
+			Godziny pracy:<br /><br/>
+			<label for="godz_od">Od:</label>
+			<input type="text" name="godz_od" /><br /><br />
+			<label for="godz_do">Do:</label>
+			<input type="text" name="godz_do" /><br /><br />
+			<input type="submit" value="Dodaj lekarza" />
 		</form>		
 		<?php
 	}
