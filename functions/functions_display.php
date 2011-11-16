@@ -126,7 +126,14 @@
 				$lacz = lacz_baza_danych();
 				mysql_query("SET NAMES 'utf8'");
 				$lekarz=$_SESSION['prawidlowy_uzytkownik'];
-				$wynik = $lacz->query("select wi.data, wi.pesel_pacjenta, pa.imie, pa.nazwisko from wizyty wi, pacjenci pa where wi.pesel_pacjenta = pa.pesel_pacjenta and wi.pesel_pracownika = '$lekarz' and wi.opis = '' group by wi.data order by wi.data");
+				/*$wynik = $lacz->query("select wi.data, wi.pesel_pacjenta, pa.imie, pa.nazwisko from wizyty wi, pacjenci pa 
+				where wi.pesel_pacjenta = pa.pesel_pacjenta and wi.pesel_pracownika = '$lekarz' and wi.opis = '' 
+				group by wi.data order by wi.data");*/
+				
+				$wynik = $lacz->query("select wi.data, pa.pesel_pacjenta, pa.imie, pa.nazwisko from wizyty wi, pacjenci pa 
+				where wi.id_pacjenta = pa.id_pacjenta 
+				and wi.id_pracownika = (select id_pracownika from pracownicy where pesel_pracownika = '$lekarz') and wi.opis = ''
+				group by wi.data order by wi.data");
 				if(($dane = $wynik->num_rows)==0){
 					echo '<p class="error">Brak wizyt bez opisów.</p>';
 					tworz_stopke_html();

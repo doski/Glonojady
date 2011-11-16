@@ -47,7 +47,8 @@
 	//funkcja dodawania wizyty
 	function dodaj_opis_wizyty($pesel, $wizyta, $opis){
 		$lacz = lacz_baza_danych();
-		$wynik = $lacz->query("update wizyty set opis = '$opis' where pesel_pracownika = '$pesel' and data = '2011-10-18 14:00:00'");
+		$wynik = $lacz->query("update wizyty set opis = '$opis' where id_pracownika = 
+								(select id_pracownika from pracownicy where pesel_pracownika = '$pesel') and data = '2011-10-18 15:00:00'");
 		if($wynik == false){
 			echo '<p class="error">Dodanie opisu wizyty nie powiodło się.</p><br />';
 			exit;
